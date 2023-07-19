@@ -1,25 +1,17 @@
 replicaCount: 1
+
 image:
   repository: headscale/headscale
   pullPolicy: IfNotPresent
   tag: "latest"
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-podAnnotations: {}
-podSecurityContext: {}
-securityContext: {}
+
 service:
   type: ClusterIP
   server:
     port: 8080
   metrics:
     port: 9090
-resources: {}
-nodeSelector: {}
-tolerations: []
-affinity: {}
-serviceAccount: {}
+
 configuration:
   server_url: http://0.0.0.0:8080
   metrics_listen_addr: 0.0.0.0:9090
@@ -29,3 +21,15 @@ configuration:
   db_type: sqlite3
   db_path: /etc/headscale/db.sqlite
   configuration:
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+serviceAccount: {}
