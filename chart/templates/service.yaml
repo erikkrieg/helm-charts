@@ -8,11 +8,13 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.server.port }}
+      nodePort: 30080
       targetPort: 8080
       protocol: TCP
       name: server
     - port: {{ .Values.service.metrics.port }}
       targetPort: 9090
+      nodePort: 30090
       protocol: TCP
       name: metrics
   selector: {{- include "headscale.selectorLabels" . | nindent 4 }}
