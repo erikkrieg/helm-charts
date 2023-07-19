@@ -12,6 +12,8 @@ service:
   metrics:
     port: 9090
 
+# Example configurations:
+# https://github.com/juanfont/headscale/blob/main/config-example.yaml
 configuration:
   server_url: http://0.0.0.0:8080
   metrics_listen_addr: 0.0.0.0:9090
