@@ -23,7 +23,6 @@ configuration:
     private_key_path: /etc/headscale/noise_private.key
   db_type: sqlite3
   db_path: /etc/headscale/db.sqlite
-  configuration:
 
 imagePullSecrets: []
 nameOverride: ""
