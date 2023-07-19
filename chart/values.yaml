@@ -1,9 +1,8 @@
 replicaCount: 1
 image:
-  repository: nginx
+  repository: headscale/headscale
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -20,3 +19,13 @@ resources: {}
 nodeSelector: {}
 tolerations: []
 affinity: {}
+serviceAccount: {}
+configuration:
+  server_url: http://0.0.0.0:8080
+  metrics_listen_addr: 0.0.0.0:9090
+  private_key_path: /etc/headscale/private.key
+  noise:
+    private_key_path: /etc/headscale/noise_private.key
+  db_type: sqlite3
+  db_path: /etc/headscale/db.sqlite
+  configuration:

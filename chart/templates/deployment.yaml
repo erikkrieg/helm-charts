@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,9 +6,7 @@ metadata:
   labels:
     {{- include "headscale.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "headscale.selectorLabels" . | nindent 6 }}
@@ -33,9 +32,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["headscale"]
+          args: ["serve"]
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: 8080
+              protocol: TCP
+            - name: metrics
+              containerPort: 9090
               protocol: TCP
           livenessProbe:
             httpGet:
@@ -47,6 +51,12 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ include "headscale.fullname" . }}-config
+              mountPath: /etc/headscale/config.yaml
+              subPath: config.yaml
+            - name: emptydir-volume
+              mountPath: /etc/headscale 
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
