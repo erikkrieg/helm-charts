@@ -44,12 +44,12 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /metrics
+              port: metrics
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /metrics
+              port: metrics
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
