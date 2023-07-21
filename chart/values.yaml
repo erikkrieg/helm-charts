@@ -20,9 +20,9 @@ configuration:
   metrics_listen_addr: 0.0.0.0:9090
   grpc_listen_addr: 0.0.0.0:50443
   grpc_allow_insecure: false
-  private_key_path: /etc/headscale/private.key
+  private_key_path: /var/lib/headscale/private.key
   noise:
-    private_key_path: /etc/headscale/noise_private.key
+    private_key_path: /var/lib/headscale/noise_private.key
   ip_prefixes:
     - fd7a:115c:a1e0::/48
     - 100.64.0.0/10
@@ -42,11 +42,11 @@ configuration:
   ephemeral_node_inactivity_timeout: 30m
   node_update_check_interval: 10s
   db_type: sqlite3
-  db_path: /etc/headscale/db.sqlite
+  db_path: /var/lib/headscale/db.sqlite
   acme_url: https://acme-v02.api.letsencrypt.org/directory
   acme_email: ""
   tls_letsencrypt_hostname: ""
-  tls_letsencrypt_cache_dir: /etc/headscale/cache
+  tls_letsencrypt_cache_dir: /var/lib/headscale/cache
   tls_letsencrypt_challenge_type: HTTP-01
   tls_letsencrypt_listen: ":http"
   tls_cert_path: ""
@@ -62,7 +62,7 @@ configuration:
     domains: []
     magic_dns: true
     base_domain: example.com
-  unix_socket: ./headscale.sock
+  unix_socket: /var/run/headscale/headscale.sock
   unix_socket_permission: "0770"
   logtail:
     enabled: false

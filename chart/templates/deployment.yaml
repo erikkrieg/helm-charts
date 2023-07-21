@@ -58,6 +58,8 @@ spec:
               subPath: config.yaml
             - name: emptydir-volume
               mountPath: /etc/headscale 
+            - name: {{ include "headscale.fullname" . }}-data
+              mountPath: /var/lib/headscale
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -76,3 +78,7 @@ spec:
             name: {{ include "headscale.fullname" . }}-config
         - name: emptydir-volume
           emptyDir: {}
+        - name: {{ include "headscale.fullname" . }}-data 
+          persistentVolumeClaim:
+            claimName: {{ include "headscale.fullname" . }}-data 
+
