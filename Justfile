@@ -1,6 +1,6 @@
-update:
+update +ARGS="":
   #!/usr/bin/env sh
-  helm upgrade vpn --create-namespace --install -n headscale --wait ./chart 
+  helm upgrade vpn --create-namespace --install -n headscale --wait {{ARGS}} ./chart 
 
 key:
   kubectl exec deploy/vpn-headscale -n headscale -- headscale users create eksys 
