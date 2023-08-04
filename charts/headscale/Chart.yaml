@@ -1,6 +1,6 @@
 apiVersion: v2
 name: headscale
-description: Chart for self-hosted tailscale control server
+description: Chart for headscale, a self-hosted tailscale control server
 type: application
 version: 0.0.1
 appVersion: "0.0.1"
