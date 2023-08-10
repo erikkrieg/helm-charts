@@ -12,6 +12,9 @@ service:
   metrics:
     port: 9090
 
+# https://tailscale.com/kb/1018/acls/
+acl: ""
+
 # Example configurations:
 # https://github.com/juanfont/headscale/blob/main/config-example.yaml
 configuration:

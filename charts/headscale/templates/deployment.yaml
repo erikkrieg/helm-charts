@@ -56,6 +56,11 @@ spec:
             - name: {{ include "headscale.fullname" . }}-config
               mountPath: /etc/headscale/config.yaml
               subPath: config.yaml
+            {{- if .Values.acl }}
+            - name: {{ include "headscale.fullname" . }}-acl
+              mountPath: {{ .Values.configuration.acl_policy_path }}
+              subPath: {{ base .Values.configuration.acl_policy_path }} 
+            {{- end }}
             - name: emptydir-volume
               mountPath: /etc/headscale 
             - name: {{ include "headscale.fullname" . }}-data
@@ -76,6 +81,11 @@ spec:
         - name: {{ include "headscale.fullname" . }}-config
           configMap:
             name: {{ include "headscale.fullname" . }}-config
+        {{- if .Values.acl }}
+        - name: {{ include "headscale.fullname" . }}-acl
+          configMap:
+            name: {{ include "headscale.fullname" . }}-acl
+        {{- end }}
         - name: emptydir-volume
           emptyDir: {}
         - name: {{ include "headscale.fullname" . }}-data 

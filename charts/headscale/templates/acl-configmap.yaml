@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "headscale.fullname" . }}-acl
+data:
+  {{ required "configuration.acl_policy_path is required to use ACLs" .Values.configuration.acl_policy_path | base }}: |-
+    {{- toString .Values.acl | nindent 4 }}
